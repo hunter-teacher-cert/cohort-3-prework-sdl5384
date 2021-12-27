@@ -1,0 +1,9 @@
+No, I wug.
+You wugga wug.
+I wug.
+
+There are new lines created at the end of the ping() method.  ping() method prints out a period and then goes to the next line down.
+
+The baffle() method calls or invokes the ping method() every time itself is called, which will insert a new line at the end.
+
+There are only spaces at the end of the Strings.
