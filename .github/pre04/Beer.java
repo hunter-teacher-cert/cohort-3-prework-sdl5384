@@ -6,8 +6,8 @@ public class Beer
   {
     if (beersLeft == 0)
     {
-      System.out.println("No bottles of beer on the wall,");
-      System.out.println("no bottles of beer,");
+      System.out.println("No more bottles of beer on the wall,");
+      System.out.println("no more bottles of beer,");
       System.out.println("ya' can't take one down, ya' can't pass it around,");
       System.out.println("'cause there are no more bottles of beer on the wall!");
     }
