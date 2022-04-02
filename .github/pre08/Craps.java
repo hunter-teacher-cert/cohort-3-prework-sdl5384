@@ -3,20 +3,30 @@ import java.lang.Math.*;
 
 public class Craps
 {
-  public static int[] roll()
-  {
-    int[] die_one = {1,2,3,4,5,6};
-    int[] die_two = {1,2,3,4,5,6};
+  int[] winLossFreq = new int[2];
 
+  public void setStats(int win, int loss)
+  {
+    winLossFreq[0] = 0;
+    winLossFreq[1] = 0;
+  }
+
+  public int[] getWinLossFreq()
+  {
+    return winLossFreq;
+  }
+  
+  public static int[] roll(int min, int max)
+  {
     Random random = new Random();
     int[] dice_values = new int[2];
-    dice_values[0] = random.nextInt(die_one.length);
-    dice_values[1] = random.nextInt(die_two.length);
+    dice_values[0] = random.nextInt(max - min)+min;
+    dice_values[1] = random.nextInt(max - min)+min;
 
     return dice_values;
   }
 
-  public static Object[] shoot(int[] dice_vals)
+  public static String shoot(int[] dice_vals)
   {
     String result = "";
     int sum = dice_vals[0] + dice_vals[1];
@@ -33,59 +43,39 @@ public class Craps
     {
       result = "point";
     }
+
+    if (result.equals("point"))
+    {
+      
+    }
     System.out.println("You have rolled a " + dice_vals[0] + " and a " + dice_vals[1]);
     System.out.println("Your dice sum is " + sum);
 
-    Object[] game_result = {result, dice_vals[0], dice_vals[1]};
-    return game_result;
+    return result;
   }
   
   public static void round()
   {
     int[] dice_numbers = new int[2];
-    dice_numbers = roll();
+    dice_numbers = roll(1,7);
     String player_status = shoot(dice_numbers);
+    System.out.println("You " + player_status);
   }
-
+  
   public static int[] counter(String game_point)
   {
     //array sequence is Win, Lose, Point
-    int[] player_data = new int[3];
-    player_data[0] = 1;
-    player_data[1] = 1;
-    player_data[2] = 1;
+    int[] player_data = getWinLossFreq();
     if (game_point.equals("win"))
-      player_data[0]++;
+      setWinLossFreq(1,0);
     else if (game_point.equals("lose"))
-      player_data[1]++;
-    else if (game_point.equals("point"))
-      player_data[2]++;
+      setWinLossFreq(0,1);
 
     return player_data;
   }
   
   public static void main(String[] args)
   {
-    Object[] status = round();
-    int sum = status[1] + status[2];
-    this.counter(status[0]);
-    while (!status[0].equals("win") || !status[0].equals("lose"))
-    {
-      status = round();
-      counter(status[0]);
-      if (status.equals("point"))
-      {
-        status = round();
-        counter(status[0]);
-        if (status[0].equals("point") || sum == 7)
-        {
-          status[0] = "win";
-          counter(status[0]);
-        }
-      }
-    }
-
-    int[] data = this.get_player_data();
-    System.out.println("");
+    round();
   }
 }
