@@ -9,36 +9,37 @@ public class BingoPlayer
   "marker" will be placed in that assigned sapce
   on the markerboard
   */
-  public static String[][] setupMarkerBoard(int board_size)
+
+  int[][] bingoBoard = new int[8][8];
+  String[][] markerBoard = new String[8][8];
+  
+  public void setupMarkerBoard()
   {
-    String[][] markerboard = new String[board_size][board_size];
     int i, j;
-    for (i = 0; i < board_size; i++)
+    for (i = 0; i < 8; i++)
     {
-       for (j = 0; j < board_size; j++)
+       for (j = 0; j < 8; j++)
        {
          if (i == j)
          {
            //FREE CENTER SPACE
-           markerboard[i][j] = "*";
+           markerBoard[i][j] = "*";
          }
          else
          {
-           markerboard[i][j] = "";
+           markerBoard[i][j] = "";
          }
        }
     }
-    return markerboard;
   }
   
-  public static int[][] setupBingoBoard(int board_size, int max)
+  public void setupBingoBoard(int min, int max)
   {
     int i, j, randomNumber;
-    int[][] bingoBoard = new int[board_size][board_size];
     Random randomValue = new Random();
-    for (i = 0; i < board_size; i++)
+    for (i = 0; i < 8; i++)
     {
-      for (j = 0; j < board_size; j++)
+      for (j = 0; j < 8; j++)
       {
         if (i == j)
         {
@@ -47,26 +48,33 @@ public class BingoPlayer
         }
         else
         {
-          bingoBoard[i][j] = randomValue.nextInt(max);
+          bingoBoard[i][j] = randomValue.nextInt(max-min)+min;
         }
       }
     }
-    return bingoBoard;
+  }
+
+  public static void displayBingoBoard(int[][] b)
+  {
+    
+  }
+
+  public static void displayMarkerBoard(String[][] m)
+  {
+    
   }
   
-  public BingoPlayer(int boardDimension, int max)
+  public BingoPlayer(int min, int max)
   {
-    int[][] bingoboard = new int[boardDimension][boardDimension];
-    String[][] markerboard = new String[boardDimension][boardDimension];
-    bingoboard = setupBingoBoard(boardDimension, max);
+    setupBingoBoard(min, max);
+    setupMarkerBoard();
   }
 
   public static void main(String[] args)
   {
-    int dimension = 8;
     int highest_value = 99;
-    BingoPlayer player = new BingoPlayer(dimension,highest_value);
+    BingoPlayer player = new BingoPlayer(1,highest_value);
 
-    System.out.println(BingoPlayer.get)
+    System.out.println(player.bingoBoard[3][5]);
   }
 }
